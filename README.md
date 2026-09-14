@@ -117,7 +117,7 @@ pytest -v
 ```bash
 curl -X POST http://localhost:5000/api/admin/productos/1/stock \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: admin-viva-2026" \
+  -H "X-API-Key: TU_ADMIN_API_KEY" \
   -d '{"stock_disponible": 100}'
 ```
 
@@ -135,7 +135,7 @@ curl -X POST http://localhost:5000/api/admin/productos/1/stock \
 4. Una vez desplegado, la URL pública asignada por la plataforma sirve
    tanto el frontend como la API.
 
-**URL de la aplicación publicada:** _(...)_
+**URL de la aplicación publicada:** _mercado-viva-inventario.onrender.com_
 
 ## 7. Integrantes del equipo
 
