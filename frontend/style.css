@@ -1,0 +1,314 @@
+/* -------------------------------------------------------------------------
+   Mercado VIVA — Verificación de inventario
+   Paleta: verde bodega (#2F4A3C), mango (#E8A33D), papel (#FAF8F3)
+   Tipografía: Fraunces (marca / cifras) + Inter (texto de interfaz)
+---------------------------------------------------------------------------*/
+
+:root {
+  --papel: #FAF8F3;
+  --papel-sombra: #EFEBE1;
+  --verde-bodega: #2F4A3C;
+  --verde-bodega-oscuro: #203329;
+  --mango: #E8A33D;
+  --mango-oscuro: #C8811F;
+  --rojo-agotado: #B23A2E;
+  --gris-linea: #DCD6C7;
+  --texto-principal: #20261F;
+  --texto-suave: #5B6459;
+  --radio-card: 14px;
+  --sombra-card: 0 1px 2px rgba(32, 38, 31, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--texto-principal);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --------------------------- Encabezado --------------------------------*/
+
+.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px clamp(20px, 4vw, 56px);
+  background: var(--verde-bodega);
+  color: var(--papel);
+  flex-wrap: wrap;
+}
+
+.encabezado__marca {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.encabezado__logo {
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.01em;
+}
+
+.encabezado__linea {
+  width: 1px;
+  height: 22px;
+  background: rgba(250, 248, 243, 0.35);
+}
+
+.encabezado__proceso {
+  font-size: 14.5px;
+  color: rgba(250, 248, 243, 0.82);
+}
+
+.encabezado__buscador input {
+  width: min(320px, 60vw);
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(250, 248, 243, 0.3);
+  background: rgba(250, 248, 243, 0.1);
+  color: var(--papel);
+  font-family: inherit;
+  font-size: 14.5px;
+}
+
+.encabezado__buscador input::placeholder { color: rgba(250, 248, 243, 0.6); }
+.encabezado__buscador input:focus {
+  outline: 2px solid var(--mango);
+  outline-offset: 2px;
+  background: rgba(250, 248, 243, 0.16);
+}
+
+/* --------------------------- Layout general -----------------------------*/
+
+.contenedor {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 36px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 36px clamp(20px, 4vw, 56px) 80px;
+  align-items: start;
+}
+
+@media (max-width: 880px) {
+  .contenedor { grid-template-columns: 1fr; }
+}
+
+.catalogo__cabecera h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 30px;
+  margin: 0 0 8px;
+}
+
+.catalogo__cabecera p {
+  max-width: 54ch;
+  color: var(--texto-suave);
+  line-height: 1.55;
+  margin: 0 0 28px;
+}
+
+/* --------------------------- Grilla de productos -------------------------*/
+
+.grilla-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.tarjeta-producto {
+  background: #fff;
+  border-radius: var(--radio-card);
+  box-shadow: var(--sombra-card);
+  border-left: 4px solid var(--gris-linea);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tarjeta-producto[data-nivel="alto"] { border-left-color: var(--verde-bodega); }
+.tarjeta-producto[data-nivel="bajo"] { border-left-color: var(--mango); }
+.tarjeta-producto[data-nivel="agotado"] { border-left-color: var(--rojo-agotado); opacity: 0.85; }
+
+.tarjeta-producto__categoria {
+  font-size: 12.5px;
+  color: var(--texto-suave);
+}
+
+.tarjeta-producto__nombre {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.tarjeta-producto__precio {
+  font-size: 15px;
+  color: var(--verde-bodega-oscuro);
+  font-weight: 600;
+}
+
+.tarjeta-producto__stock {
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.tarjeta-producto__stock strong { color: var(--texto-principal); }
+
+.tarjeta-producto__acciones {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.tarjeta-producto__acciones input {
+  width: 52px;
+  padding: 8px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gris-linea);
+  font-family: inherit;
+  text-align: center;
+}
+
+.boton {
+  border: none;
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.06s ease, background 0.15s ease;
+}
+
+.boton:active { transform: scale(0.97); }
+.boton:disabled { cursor: not-allowed; opacity: 0.55; }
+
+.boton--primario {
+  background: var(--verde-bodega);
+  color: var(--papel);
+  flex: 1;
+}
+.boton--primario:hover:not(:disabled) { background: var(--verde-bodega-oscuro); }
+
+.boton--agotado {
+  background: var(--papel-sombra);
+  color: var(--rojo-agotado);
+  flex: 1;
+}
+
+.boton--mango {
+  background: var(--mango);
+  color: var(--verde-bodega-oscuro);
+}
+.boton--mango:hover:not(:disabled) { background: var(--mango-oscuro); color: var(--papel); }
+
+.boton--texto {
+  background: none;
+  color: var(--texto-suave);
+  padding: 9px 10px;
+}
+.boton--texto:hover { color: var(--rojo-agotado); }
+
+/* --------------------------- Carrito / reservas ---------------------------*/
+
+.carrito {
+  position: sticky;
+  top: 24px;
+  background: #fff;
+  border-radius: var(--radio-card);
+  box-shadow: var(--sombra-card);
+  padding: 22px;
+}
+
+.carrito__cabecera h2 {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+.carrito__ayuda {
+  font-size: 13px;
+  color: var(--texto-suave);
+  margin: 0 0 16px;
+}
+
+.lista-reservas { display: flex; flex-direction: column; gap: 12px; }
+
+.reserva-item {
+  border: 1px solid var(--gris-linea);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.reserva-item__fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.reserva-item__nombre { font-weight: 600; font-size: 14.5px; }
+.reserva-item__cantidad { color: var(--texto-suave); font-size: 13px; }
+
+.reserva-item__temporizador {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--mango-oscuro);
+  margin-top: 6px;
+}
+
+.reserva-item__temporizador[data-urgente="true"] { color: var(--rojo-agotado); }
+
+.reserva-item__acciones {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.reserva-item__acciones .boton { padding: 7px 12px; font-size: 12.5px; }
+
+.reserva-item--confirmada { border-color: var(--verde-bodega); background: #F3F7F2; }
+.reserva-item--confirmada .reserva-item__temporizador { display: none; }
+
+.carrito-vacio {
+  color: var(--texto-suave);
+  font-size: 13.5px;
+  padding: 18px 0 4px;
+}
+
+/* --------------------------- Notificaciones -------------------------------*/
+
+.notificacion {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 12px);
+  background: var(--verde-bodega-oscuro);
+  color: var(--papel);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  max-width: min(90vw, 420px);
+  text-align: center;
+}
+
+.notificacion[data-tipo="error"] { background: var(--rojo-agotado); }
+
+.notificacion.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}

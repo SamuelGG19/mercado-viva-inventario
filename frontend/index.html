@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mercado VIVA · Verificación de inventario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="encabezado">
+  <div class="encabezado__marca">
+    <span class="encabezado__logo">VIVA</span>
+    <span class="encabezado__linea"></span>
+    <span class="encabezado__proceso">Verificación de inventario</span>
+  </div>
+  <div class="encabezado__buscador">
+    <input type="search" id="campo-busqueda" placeholder="Buscar producto…" autocomplete="off" />
+  </div>
+</header>
+
+<main class="contenedor">
+
+  <section class="catalogo" aria-label="Catálogo de productos">
+    <div class="catalogo__cabecera">
+      <h1>Bodega digital</h1>
+      <p>El stock que ves aquí se actualiza en tiempo real: cuando reservas
+      un producto para tu compra, otros clientes ya no pueden agotarlo por ti.</p>
+    </div>
+    <div id="lista-productos" class="grilla-productos" aria-live="polite"></div>
+  </section>
+
+  <aside class="carrito" aria-label="Reservas activas">
+    <div class="carrito__cabecera">
+      <h2>Tu reserva</h2>
+      <p class="carrito__ayuda">Cada unidad queda apartada 15 minutos.</p>
+    </div>
+    <div id="lista-reservas" class="lista-reservas"></div>
+    <div id="carrito-vacio" class="carrito-vacio">
+      Aún no has reservado ningún producto.
+    </div>
+  </aside>
+
+</main>
+
+<div id="notificacion" class="notificacion" role="status" aria-live="assertive"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
