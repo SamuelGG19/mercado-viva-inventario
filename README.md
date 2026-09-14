@@ -121,19 +121,7 @@ curl -X POST http://localhost:5000/api/admin/productos/1/stock \
   -d '{"stock_disponible": 100}'
 ```
 
-## 6. Despliegue (Render, Railway u otra plataforma equivalente)
-
-1. Sube este repositorio a GitHub.
-2. En Render/Railway, crea un nuevo servicio web apuntando a la carpeta
-   `backend/`, con:
-   - **Comando de build:** `pip install -r requirements.txt`
-   - **Comando de inicio:** `gunicorn app:app` (ya incluido en `Procfile`)
-3. Configura las variables de entorno:
-   - `DATABASE_URL` (si usas Postgres administrado, por ejemplo Neon o el
-     Postgres del propio Render).
-   - `ADMIN_API_KEY` (clave de administrador en producción).
-4. Una vez desplegado, la URL pública asignada por la plataforma sirve
-   tanto el frontend como la API.
+## 6. Despliegue en Render
 
 **URL de la aplicación publicada:** _mercado-viva-inventario.onrender.com_
 
